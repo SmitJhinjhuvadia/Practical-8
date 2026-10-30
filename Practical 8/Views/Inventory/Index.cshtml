@@ -1,0 +1,46 @@
+﻿
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+@model IEnumerable<Practical_8.Models.Product>
+
+@{
+    ViewBag.Title = "Inventory";
+}
+
+<h2>Inventory Management</h2>
+
+<p>
+    @Html.ActionLink("Add New Product", "Create", "Inventory", null,
+        new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.Category</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit",
+                        new { id = item.ProductId }) |
+                    @Html.ActionLink("Delete", "Delete",
+                        new { id = item.ProductId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

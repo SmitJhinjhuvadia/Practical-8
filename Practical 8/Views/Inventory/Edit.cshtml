@@ -1,0 +1,64 @@
+﻿<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+@model Practical_8.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.ProductId)
+
+    <div class="form-horizontal">
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductName, "Product Name",
+                new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.ProductName,
+                new { @class = "form-control", placeholder = "Enter product name" })
+            @Html.ValidationMessageFor(m => m.ProductName,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Category,
+                new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Category,
+                new { @class = "form-control", placeholder = "Enter category" })
+            @Html.ValidationMessageFor(m => m.Category,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Quantity,
+                new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Quantity,
+                new { @class = "form-control", type = "number", min = "0" })
+            @Html.ValidationMessageFor(m => m.Quantity,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price,
+                new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Price,
+                new { @class = "form-control", type = "number", step = "0.01", min = "0" })
+            @Html.ValidationMessageFor(m => m.Price,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <button type="submit" class="btn btn-primary">Update Product</button>
+
+        @Html.ActionLink("Cancel", "Index", "Inventory",
+            null, new { @class = "btn btn-secondary" })
+    </div>
+}
